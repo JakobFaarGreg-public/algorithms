@@ -1,6 +1,7 @@
 """Module that contains the dijkstra's shortest path implementation"""
 import json
 
+
 def dijkstra(
     graph: dict[str, dict[str, int]], source: str
 ) -> dict[str, tuple[int, str]]:

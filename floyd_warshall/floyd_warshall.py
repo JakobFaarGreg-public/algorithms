@@ -7,14 +7,15 @@ INT_MAX_SIZE: int = 100000
 
 
 def convert_letter_to_number(letter: str) -> int:
+    """Takes in a letter and uses ASCII ordering to convert it
+    to its 1-indexed placement in the alphabet"""
     cpy: str = letter.lower()
     number: int = ord(cpy) - DIFFERENCE_FROM_0_TO_A_IN_ASCII
     return number
 
 
 def floyd_warshall(graph: dict[str, dict[str, int]]) -> list[list[int]]:
-    print("graph:")
-    print(graph)
+    """Receives a graph and returns a matrix of sum weight of travelling between nodes"""
     distances: list[list[int]] = [
         list(itertools.repeat(INT_MAX_SIZE, len(graph))) for x in graph
     ]
