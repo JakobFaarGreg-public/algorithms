@@ -19,17 +19,21 @@ def floyd_warshall(graph: dict[str, dict[str, int]]) -> list[list[int]]:
     distances: list[list[int]] = [
         list(itertools.repeat(INT_MAX_SIZE, len(graph))) for x in graph
     ]
+    # Initialize all nodes with their edges' weights
     for key, values in graph.items():
         for key2, value2 in values.items():
             distances[convert_letter_to_number(key) - 1][
                 convert_letter_to_number(key2) - 1
             ] = value2
 
+    # Initialize all nodes weight to themselves to 0
     for key, values in graph.items():
         distances[convert_letter_to_number(key) - 1][
             convert_letter_to_number(key) - 1
         ] = 0
 
+    # If the distance between nodes 'i' and 'j' would be shorter
+    # through a third node k, then use that as the route.
     for k in range(len(graph)):
         for i in range(len(graph)):
             for j in range(len(graph)):
