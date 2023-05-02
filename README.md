@@ -11,6 +11,8 @@ Install requirements with ```pip3 install -r requirements.txt```
 
 ## linter
 Run linter with command: ```pylint $(git ls-files '*.py')```
+You can also run black with command: ```black .```
+And/or run ```mypy .```
 
 ## Dijkstra
 Maintain a table of three columns, with a row for each node.
