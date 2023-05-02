@@ -19,18 +19,27 @@ def floyd_warshall(graph: dict[str, dict[str, int]]) -> list[list[int]]:
     distances: list[list[int]] = [
         list(itertools.repeat(INT_MAX_SIZE, len(graph))) for x in graph
     ]
+    previous: list[list[str]] = [
+        list(itertools.repeat('null', len(graph))) for x in graph
+    ]
     # Initialize all nodes with their edges' weights
     for key, values in graph.items():
         for key2, value2 in values.items():
             distances[convert_letter_to_number(key) - 1][
                 convert_letter_to_number(key2) - 1
             ] = value2
+            previous[convert_letter_to_number(key) - 1][
+                convert_letter_to_number(key2) - 1
+            ] = key2
 
     # Initialize all nodes weight to themselves to 0
     for key, values in graph.items():
         distances[convert_letter_to_number(key) - 1][
             convert_letter_to_number(key) - 1
         ] = 0
+        previous[convert_letter_to_number(key) - 1][
+            convert_letter_to_number(key) - 1
+        ] = key
 
     # If the distance between nodes 'i' and 'j' would be shorter
     # through a third node k, then use that as the route.
@@ -39,8 +48,13 @@ def floyd_warshall(graph: dict[str, dict[str, int]]) -> list[list[int]]:
             for j in range(len(graph)):
                 if distances[i][j] > distances[i][k] + distances[k][j]:
                     distances[i][j] = distances[i][k] + distances[k][j]
+                    # previous[i][j] = distances[k][j]
 
     return distances
+
+def create_path(node1: str, node2: str) -> None:
+    '''Takes in a pair of nodes and finds the shortest path between them'''
+    print("finished")
 
 
 def main() -> None:
